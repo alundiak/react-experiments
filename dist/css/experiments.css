@@ -1,0 +1,17 @@
+.app {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border: 1px solid green;
+}
+.app > div {
+  border: 1px blue dotted;
+  margin-right: 10px;
+}
+.app-only {
+  color: green;
+}
+
+
+
+/*# sourceMappingURL=experiments.css.map*/
