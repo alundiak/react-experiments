@@ -6,6 +6,7 @@ import PrettierPlugin from 'prettier-webpack-plugin';
 import { getIfUtils, removeEmpty } from 'webpack-config-utils';
 
 const src = resolve(__dirname, './src');
+const reactSumSrc = resolve(__dirname, 'node_modules/@lundiak/react-sum/src');
 
 export default env => {
     const { ifNotProduction } = getIfUtils(env);
@@ -13,7 +14,7 @@ export default env => {
         // "core-js/modules/es6.promise", ?
         // "core-js/modules/es6.array.iterator", ?
         entry: {
-            mainChunk: './src/index.jsx'
+            experimentsChunk: './src/index.jsx'
         },
         // entry: { // TRY
         //     'babel-polyfil',
@@ -22,11 +23,12 @@ export default env => {
         output: {
             path: __dirname + '/dist',
             publicPath: env.dev ? '/' : './',
-            filename: 'bundle.js'
+            filename: 'reactExperiments.js'
         },
         resolve: {
             alias: {
-                css: resolve(src, './css'),
+                myCss: resolve(src, './css'), // my current codebase css/ folder
+                css: resolve(reactSumSrc, 'css'), // to experiment with relative path from dependant component and webpack alias
                 components: resolve(src, './components'),
                 img: resolve(src, './images'),
                 // Alternative, but not sure how proper. Might be useful for "npm link"
@@ -35,7 +37,7 @@ export default env => {
 
             // Standard: 'main', 'browser', 'module' (not sure if it's Webpack or npm )
             // Non-standard, and requires explicit mention in array: 'jsnext:main', 'esm'
-            mainFields: ['main', 'browser', 'module', 'jsnext:main',  'esm'],
+            mainFields: ['module', 'esm', 'jsnext:main', 'main', 'browser'],
 
             modules: ['node_modules', 'bower_components', 'src'],
             extensions: ['.js', '.css', '.less', '.jsx', '.json']
@@ -88,8 +90,8 @@ export default env => {
         plugins: removeEmpty([
             ifNotProduction(new webpack.HotModuleReplacementPlugin()),
             new MiniCssExtractPlugin({
-                filename: 'css/experiments.css', // "filename" here is not related to real file name(s) in src/css/ folder.
-                // chunkFilename: 'experiments' // ???
+                filename: 'css/reactExperiments.css', // "filename" here is not related to real file name(s) in src/css/ folder.
+                // chunkFilename: 'reactExperiments' // ???
             }),
             new HtmlWebpackPlugin({
                 title: 'React Experiments', // not used. But if needed , then in index.html => `<title><%= htmlWebpackPlugin.options.title %></title>`
