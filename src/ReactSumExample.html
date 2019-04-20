@@ -1,21 +1,13 @@
 <!DOCTYPE html>
-<info>
-    <!-- https://reactjs.org/docs/add-react-to-a-website.html -->
-    <!-- https://raw.githubusercontent.com/reactjs/reactjs.org/master/static/html/single-file-example.html -->
-</info>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>ReactSum Example</title>
 
-    <!-- First need to extract React and react DOM from bundle.js -->
     <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-    <!-- Now you can use JSX in any <script> tag by adding type="text/babel" attribute to it. -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
 
@@ -34,6 +26,7 @@
     <div class="app" id="myApp3"></div>
     <div class="app" id="myApp4"></div>
     <div class="app" id="myApp5"></div>
+    <div class="app" id="myApp6"></div>
 
     <script>
         // window.ReactSum is available for ReactDOM.render(), with no self-rendering into container app
@@ -42,11 +35,17 @@
 
     <!-- ReactSum Simple JavaScript approach -->
     <script>
-        const { Sum, Count } = ReactSum;
+        const { Sum, Count, CountWithAlias } = ReactSum;
+        // Yes, despite the App.jsx doesn't export it,
+        // file itself CountWithAlias.jsx exports for browser as root["ReactSum"]["CountWithAlias"]
+        // console.log(CountWithAlias); // but it's empty object - ????
+
         const myApp3Container = document.querySelector('#myApp3');
         const myApp4Container = document.querySelector('#myApp4');
+        const myApp5Container = document.querySelector('#myApp5');
         ReactDOM.render(React.createElement(Sum.default), myApp3Container);
         ReactDOM.render(React.createElement(Count.default), myApp4Container);
+        // ReactDOM.render(React.createElement(CountWithAlias), myApp5Container);
     </script>
 
     <!-- ReactSum Babel/JSX approach -->
@@ -54,12 +53,12 @@
         // const { Count } = ReactSum;
         // console.log(ReactSum.Count);
 
-        const myApp5Container = document.querySelector('#myApp5');
+        const myApp6Container = document.querySelector('#myApp6');
 
         // ReactDOM.render(<ReactSum.Sum.default />, myApp5Container);
         // or
         class LocalSum extends ReactSum.Sum.default {}
-        ReactDOM.render(<LocalSum />, myApp5Container);
+        ReactDOM.render(<LocalSum />, myApp6Container);
     </script>
 </body>
 

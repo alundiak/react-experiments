@@ -4,19 +4,13 @@ import React from 'react';
 //
 // If we want to rely on one imported object (App.jsx)
 //
-// import ReactSum from '@lundiak/react-sum';
-
-//
-// Alternative approach, in case of webpack aliasing.
-//
-import ReactSum from 'reactMath/Sum'; // Using Webpack Alias DIRECTLY to node_modules
-import ReactCount from 'reactMath/Count'; // Using Webpack Alias DIRECTLY to node_modules
+import ReactSum from '@lundiak/react-sum';
 
 //
 // Using { } for custom import from the same App.jsx will still import all less file imports.
 //
-// import { Sum } from '@lundiak/react-sum';
-// import { Count } from '@lundiak/react-sum';
+import { Sum } from '@lundiak/react-sum';
+import { Count } from '@lundiak/react-sum';
 
 //
 // If App.jsx exports Sum.jsx and Count.jsx with their less files,
@@ -25,27 +19,43 @@ import ReactCount from 'reactMath/Count'; // Using Webpack Alias DIRECTLY to nod
 //
 // import Sum from '@lundiak/react-sum/src/components/Sum';
 // import Count from '@lundiak/react-sum/src/components/Count';
-// import CountWithAlias from '@lundiak/react-sum/src/components/CountWithAlias';
-// import CountWithAlias from '@lundiak/react-sum/dist/CountWithAlias';
+import CountWithAlias from '@lundiak/react-sum/src/components/CountWithAlias'; // works
+// import CountWithAlias from '@lundiak/react-sum/dist/CountWithAlias'; // doesn't work
 
-// import '@lundiak/react-sum/dist/Count.css'; // doesn't work
-// import Count from '@lundiak/react-sum/dist/Count'; // works
-// import Count from '@lundiak/react-sum/dist/CountWithAlias';
+//
+// Alternative approach, in case of webpack aliasing DIRECTLY to node_modules.
+//
+// import WebpackReactSum from 'reactMath/Sum';
+// import WebpackReactCount from 'reactMath/Count';
+
+//
+// DIST
+//
+import DistCount from '@lundiak/react-sum/dist/Count'; // works (after change devBuild with optimization to prodBuild w o.)
+
+// import DistCount from '@lundiak/react-sum/dist/CountWithAlias';
 // doesn't work after LESS injected as dep. inside of entry
 // => "react-dom.development.js:55 Uncaught Invariant Violation: Element type is invalid"
+// still doesn't work.
 
 import 'myCss/react-experiments-app.less';
+
+console.log(DistCount); // => ƒ (e) { var t = e.list; return o.a.createElement("div",
 
 const ReactExperimentsApp = (/* props */) => (
     <React.Fragment>
         {/* <ReactColorSquare /> */}
-        {/* <ReactSum.Sum /> */}
-        {/* <ReactSum.Count /> */}
-        <ReactSum />
-        <ReactCount />
-        {/* <Sum a={3} b={3} /> */}
-        {/* <Count list={[1, 2, 3]} /> */}
-        {/* <CountWithAlias list={[1, 2, 3]} /> */}
+        <ReactSum.Sum />
+        <ReactSum.Count />
+
+        <Sum a={3} b={3} />
+        <Count list={[1, 2, 3]} />
+
+        <DistCount list={[1, 2, 3, 4]} />
+
+        <CountWithAlias list={[1, 2, 3, 4, 5]} />
+        {/* <WebpackReactSum /> */}
+        {/* <WebpackReactCount /> */}
     </React.Fragment>
 );
 

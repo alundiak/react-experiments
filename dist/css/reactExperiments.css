@@ -1,9 +1,30 @@
+.sum {
+  border: 1px green dashed;
+  margin: 3px;
+  padding: 3px;
+}
+
 .count {
   border: 1px blue dotted;
   margin: 3px;
   padding: 3px;
 }
+
+.app {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border: 1px solid green;
+}
+.app > div {
+  margin-right: 10px;
+}
+.app-only {
+  color: green;
+}
+
 .react-experiments {
+  padding: 20px;
   color: green;
 }
 
