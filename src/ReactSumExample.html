@@ -1,85 +1,65 @@
 <!DOCTYPE html>
+<info>
+    <!-- https://reactjs.org/docs/add-react-to-a-website.html -->
+    <!-- https://raw.githubusercontent.com/reactjs/reactjs.org/master/static/html/single-file-example.html -->
+</info>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>window.ReactSum Example</title>
+    <title>ReactSum Example</title>
 
-    <!-- <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script> -->
-    <!-- <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> -->
-    <!-- But first need to extract React and react DOM from bundle.js -->
+    <!-- First need to extract React and react DOM from bundle.js -->
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <!-- Now you can use JSX in any <script> tag by adding type="text/babel" attribute to it. -->
 
     <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
 
-    <link href="../node_modules/@lundiak/react-sum/dist/reactSum.css" rel="stylesheet">
-
-</head>
-
-<body>
-    <info>
-        <!-- https://reactjs.org/docs/add-react-to-a-website.html -->
-        <!-- https://raw.githubusercontent.com/reactjs/reactjs.org/master/static/html/single-file-example.html -->
-    </info>
-    <div class="app" id="app"></div>
-    <div class="app" id="myApp"></div>
+    <link href="../node_modules/@lundiak/react-sum/dist/Sum.css" rel="stylesheet">
+    <link href="../node_modules/@lundiak/react-sum/dist/Count.css" rel="stylesheet">
 
     <!-- This includes also react and React DOM -->
-    <script src="../node_modules/@lundiak/react-sum/dist/bundle.js"></script>
+    <!-- <script src="../node_modules/@lundiak/react-sum/dist/bundle.js"></script> -->
+    <script src="../node_modules/@lundiak/react-sum/dist/Sum.js"></script>
+    <script src="../node_modules/@lundiak/react-sum/dist/Count.js"></script>
+    <script src="../node_modules/@lundiak/react-sum/dist/CountWithAlias.js"></script>
+</head>
+
+<body style="padding: 20px;">
+    <div class="app" id="app"></div>
+    <div class="app" id="myApp3"></div>
+    <div class="app" id="myApp4"></div>
+    <div class="app" id="myApp5"></div>
 
     <script>
-        // console.log(React, ReactDOM, ReactSum);
-        console.log(ReactSum);
-        // TODO, but I expect windowReactSum available for ReactDOM.render(), with no self-rendering into container app
-
-        // const e = React.createElement;
-
-        // class LikeButton extends React.Component {
-        //     constructor(props) {
-        //         super(props);
-        //         this.state = { liked: false };
-        //     }
-
-        //     render() {
-        //         if (this.state.liked) {
-        //             return 'You liked this.';
-        //         }
-
-        //         return e(
-        //             'button',
-        //             { onClick: () => this.setState({ liked: true }) },
-        //             'Like'
-        //         );
-        //     }
-        // }
-
-        // const myAppContainer = document.querySelector('#myApp');
-        // ReactDOM.render(e(LikeButton), myAppContainer);
-        // ReactDOM.render(e(ReactSum), myAppContainer);
-        // ReactDOM.render(ReactSum, myAppContainer);
-
+        // window.ReactSum is available for ReactDOM.render(), with no self-rendering into container app
+        console.log(React, ReactDOM, ReactSum);
     </script>
 
+    <!-- ReactSum Simple JavaScript approach -->
+    <script>
+        const { Sum, Count } = ReactSum;
+        const myApp3Container = document.querySelector('#myApp3');
+        const myApp4Container = document.querySelector('#myApp4');
+        ReactDOM.render(React.createElement(Sum.default), myApp3Container);
+        ReactDOM.render(React.createElement(Count.default), myApp4Container);
+    </script>
+
+    <!-- ReactSum Babel/JSX approach -->
     <script type="text/babel">
-        // import React from 'react';
-        // React as window.React is available when import from CDN.
-        // ReactDOM as window.ReactDOM is available when import from CDN.
+        // const { Count } = ReactSum;
+        // console.log(ReactSum.Count);
 
-        // class LikeButton2 extends React.Component {
-        //     render() {
-        //         return (
-        //             <div>
-        //                 <button>Hello</button>
-        //             </div>
-        //         );
-        //     }
-        // }
+        const myApp5Container = document.querySelector('#myApp5');
 
-        // const myAppContainer = document.querySelector('#myApp');
-        // ReactDOM.render(LikeButton2, myAppContainer);
+        // ReactDOM.render(<ReactSum.Sum.default />, myApp5Container);
+        // or
+        class LocalSum extends ReactSum.Sum.default {}
+        ReactDOM.render(<LocalSum />, myApp5Container);
     </script>
 </body>
 

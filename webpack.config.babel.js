@@ -45,6 +45,8 @@ export default env => {
         module: {
             rules: [
                 {
+                    // research more "pre-made rules"
+                    // https://medium.freecodecamp.org/how-to-set-up-deploy-your-react-app-from-scratch-using-webpack-and-babel-a669891033d4
                     enforce: 'pre',
                     test: /\.(js|jsx)$/,
                     exclude: /node_modules/,

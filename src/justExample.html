@@ -1,0 +1,100 @@
+<html>
+
+<head>
+    <title>Just Example</title>
+    <!-- https://www.w3schools.com/whatis/whatis_react.asp -->
+    <!-- https://medium.com/@to_pe/how-to-add-react-to-a-simple-html-file-a11511c0235f -->
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script> -->
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <div class="app" id="myApp1"></div>
+    <div class="app" id="myApp2"></div>
+
+    <script type="text/babel">
+            class Greeting extends React.Component {
+                render() {
+                    return (<p>Hello world</p>);
+                }
+            }
+            ReactDOM.render(
+                <Greeting />,
+                document.getElementById('root')
+            );
+    </script>
+
+    <!-- Simple JavaScript approach -->
+    <script>
+        class LikeButton1 extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { liked: false };
+            }
+
+            render() {
+                if (this.state.liked) {
+                    return 'You liked Button1.';
+                }
+
+                return React.createElement(
+                    'div',
+                    {},
+                    'LikeButton1 asks to press ',
+                    React.createElement(
+                        'button',
+                        { onClick: () => this.setState({ liked: true }) },
+                        'Like'
+                    )
+                );
+            }
+        }
+
+        const myApp1Container = document.querySelector('#myApp1');
+        ReactDOM.render(React.createElement(LikeButton1), myApp1Container);
+    </script>
+
+    <!-- Babel/JSX approach -->
+    <script type="text/babel">
+        // "React" as window.React is available when import from CDN.
+        // "ReactDOM" as window.ReactDOM is available when import from CDN.
+
+        class LikeButton2 extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { liked: false };
+            }
+
+            onBtnClick = () => {
+                this.setState({ liked: true });
+            };
+
+            render() {
+                if (this.state.liked) {
+                    return 'You liked Button2.';
+                }
+                return (
+                    <div>
+                        LikeButton2 asks to press <button onClick={this.onBtnClick}>Like</button>
+                    </div>
+                );
+            }
+        }
+
+        const myApp2Container = document.querySelector('#myApp2');
+        ReactDOM.render(<LikeButton2 />, myApp2Container);
+    </script>
+
+</body>
+
+</html>
+
+<!-- Or use JSX Transformer -->
+<!-- https://shripadk.github.io/react/docs/getting-started.html -->
