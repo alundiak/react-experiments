@@ -9,13 +9,14 @@ import React from 'react';
 //
 // Alternative approach, in case of webpack aliasing.
 //
-// import ReactSum from 'reactSum'; // Using Webpack Alias DIRECTLY to node_modules
+import ReactSum from 'reactMath/Sum'; // Using Webpack Alias DIRECTLY to node_modules
+import ReactCount from 'reactMath/Count'; // Using Webpack Alias DIRECTLY to node_modules
 
 //
 // Using { } for custom import from the same App.jsx will still import all less file imports.
 //
 // import { Sum } from '@lundiak/react-sum';
-// import { Count, Sum } from '@lundiak/react-sum';
+// import { Count } from '@lundiak/react-sum';
 
 //
 // If App.jsx exports Sum.jsx and Count.jsx with their less files,
@@ -29,7 +30,8 @@ import React from 'react';
 
 // import '@lundiak/react-sum/dist/Count.css'; // doesn't work
 // import Count from '@lundiak/react-sum/dist/Count'; // works
-import Count from '@lundiak/react-sum/dist/CountWithAlias'; // doesn't work after LESS injected as dep. inside of entry
+// import Count from '@lundiak/react-sum/dist/CountWithAlias';
+// doesn't work after LESS injected as dep. inside of entry
 // => "react-dom.development.js:55 Uncaught Invariant Violation: Element type is invalid"
 
 import 'myCss/react-experiments-app.less';
@@ -39,8 +41,10 @@ const ReactExperimentsApp = (/* props */) => (
         {/* <ReactColorSquare /> */}
         {/* <ReactSum.Sum /> */}
         {/* <ReactSum.Count /> */}
+        <ReactSum />
+        <ReactCount />
         {/* <Sum a={3} b={3} /> */}
-        <Count list={[1, 2, 3]} />
+        {/* <Count list={[1, 2, 3]} /> */}
         {/* <CountWithAlias list={[1, 2, 3]} /> */}
     </React.Fragment>
 );

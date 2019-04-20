@@ -31,8 +31,8 @@ export default env => {
                 css: resolve(reactSumSrc, 'css'), // to experiment with relative path from dependant component and webpack alias
                 components: resolve(src, './components'),
                 img: resolve(src, './images'),
-                // Alternative, but not sure how proper. Might be useful for "npm link"
-                // reactSum: resolve(__dirname, 'node_modules/@lundiak/react-sum/src/components/App.jsx')
+                // Alternative, when default imported code is not OK (or not working)
+                reactMath: resolve(__dirname, 'node_modules/@lundiak/react-sum/src/components')
             },
 
             // Standard: 'main', 'browser', 'module' (not sure if it's Webpack or npm )
