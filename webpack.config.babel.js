@@ -9,7 +9,7 @@ const src = resolve(__dirname, './src');
 const reactSumSrc = resolve(__dirname, 'node_modules/@lundiak/react-sum/src');
 
 export default env => {
-    const { ifNotProduction } = getIfUtils(env);
+    const { ifDev } = getIfUtils(env);
     return {
         // "core-js/modules/es6.promise", ?
         // "core-js/modules/es6.array.iterator", ?
@@ -38,6 +38,7 @@ export default env => {
             // Standard: 'main', 'browser', 'module' (not sure if it's Webpack or npm )
             // Non-standard, and requires explicit mention in array: 'jsnext:main', 'esm'
             mainFields: ['module', 'esm', 'jsnext:main', 'main', 'browser'],
+            // If above line comments, React Experiments will not work.
 
             modules: ['node_modules', 'bower_components', 'src'],
             extensions: ['.js', '.css', '.less', '.jsx', '.json']
@@ -64,13 +65,20 @@ export default env => {
                     }
                 },
                 {
+                    // No css files in this repo,
+                    // but it is required to load css files from dependant modules in node_modules
+                    // like with-alias.css or SumWithCssAlias.jsx file.
                     test: /\.css$/,
-                    loader: 'css-loader'
+                    use: removeEmpty([
+                        ifDev('css-hot-loader'),
+                        MiniCssExtractPlugin.loader,
+                        'css-loader'
+                    ])
                 },
                 {
                     test: /\.less$/,
                     use: removeEmpty([
-                        ifNotProduction('css-hot-loader'),
+                        ifDev('css-hot-loader'),
                         MiniCssExtractPlugin.loader,
                         'css-loader',
                         {
@@ -90,7 +98,7 @@ export default env => {
             ]
         },
         plugins: removeEmpty([
-            ifNotProduction(new webpack.HotModuleReplacementPlugin()),
+            ifDev(new webpack.HotModuleReplacementPlugin()),
             new MiniCssExtractPlugin({
                 filename: 'css/reactExperiments.css', // "filename" here is not related to real file name(s) in src/css/ folder.
                 // chunkFilename: 'reactExperiments' // ???
@@ -127,7 +135,7 @@ export default env => {
         devServer: {
             host: 'localhost',
             port: 3000,
-            hot: true,
+            hot: ifDev(true, false),
             // contentBase: './dist' // ???
         },
         devtool: 'source-map'
