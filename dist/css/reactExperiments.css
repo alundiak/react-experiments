@@ -20,6 +20,12 @@
 .react-experiments {
   padding: 20px;
 }
+.react-experiments .other-components > div {
+  border: 1px red dotted;
+  display: inline-block;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
 
 
 /*# sourceMappingURL=reactExperiments.css.map*/

@@ -2,6 +2,12 @@
 
 Place for ReactJS experiments
 
+## Components tried/used:
+
+- https://github.com/alundiak/react-sum
+- https://github.com/casesandberg/react-color
+- https://github.com/codewithbernard/react-color-square
+
 # Resources
 
 - https://reactjs.org/docs/add-react-to-a-website.html

@@ -1,5 +1,5 @@
 import React from 'react';
-// import ReactColorSquare from 'react-color-square';
+import OtherAps from './OtherApps';
 
 //
 // If we want to rely on one imported object (App.jsx)
@@ -53,7 +53,8 @@ import 'myCss/react-experiments-app.less';
 
 const ReactExperimentsApp = (/* props */) => (
     <React.Fragment>
-        {/* <ReactColorSquare /> */}
+        <OtherAps />
+
         <ReactSum.Sum />
         <ReactSum.SumWithCssAlias />
 

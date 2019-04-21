@@ -18,6 +18,13 @@
     <!-- <script src="../node_modules/@lundiak/react-sum/dist/bundle.js"></script> -->
     <script src="../node_modules/@lundiak/react-sum/dist/Sum.js"></script>
     <script src="../node_modules/@lundiak/react-sum/dist/SumWithCssAlias.js"></script>
+
+    <!-- This package doesn't work in browser, because built is for CommonsJS2 approach only -->
+    <!-- <script src="../node_modules/react-color-square/build/index.js"></script> -->
+    <!-- So after importing we have an error "ReferenceError: module is not defined" -->
+
+    <!-- This also can't be imported into browser HTML code directly. -->
+    <!-- <script src="../node_modules/react-color/lib/index.js"></script> -->
 </head>
 
 <body style="padding: 20px;">
