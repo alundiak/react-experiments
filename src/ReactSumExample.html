@@ -12,21 +12,19 @@
     <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
 
     <link href="../node_modules/@lundiak/react-sum/dist/Sum.css" rel="stylesheet">
-    <link href="../node_modules/@lundiak/react-sum/dist/Count.css" rel="stylesheet">
+    <link href="../node_modules/@lundiak/react-sum/dist/SumWithCssAlias.css" rel="stylesheet">
 
     <!-- This includes also react and React DOM -->
     <!-- <script src="../node_modules/@lundiak/react-sum/dist/bundle.js"></script> -->
     <script src="../node_modules/@lundiak/react-sum/dist/Sum.js"></script>
-    <script src="../node_modules/@lundiak/react-sum/dist/Count.js"></script>
-    <script src="../node_modules/@lundiak/react-sum/dist/CountWithAlias.js"></script>
+    <script src="../node_modules/@lundiak/react-sum/dist/SumWithCssAlias.js"></script>
 </head>
 
 <body style="padding: 20px;">
-    <div class="app" id="app"></div>
+    <div class="app" id="myApp1"></div>
+    <div class="app" id="myApp2"></div>
     <div class="app" id="myApp3"></div>
     <div class="app" id="myApp4"></div>
-    <div class="app" id="myApp5"></div>
-    <div class="app" id="myApp6"></div>
 
     <script>
         // window.ReactSum is available for ReactDOM.render(), with no self-rendering into container app
@@ -35,30 +33,31 @@
 
     <!-- ReactSum Simple JavaScript approach -->
     <script>
-        const { Sum, Count, CountWithAlias } = ReactSum;
-        // Yes, despite the App.jsx doesn't export it,
-        // file itself CountWithAlias.jsx exports for browser as root["ReactSum"]["CountWithAlias"]
-        // console.log(CountWithAlias); // but it's empty object - ????
+        const { Sum, SumWithCssAlias } = ReactSum;
 
-        const myApp3Container = document.querySelector('#myApp3');
-        const myApp4Container = document.querySelector('#myApp4');
-        const myApp5Container = document.querySelector('#myApp5');
-        ReactDOM.render(React.createElement(Sum.default), myApp3Container);
-        ReactDOM.render(React.createElement(Count.default), myApp4Container);
-        // ReactDOM.render(React.createElement(CountWithAlias), myApp5Container);
+        // TODO
+        // Even, if App.jsx would not export SumWithAlias, file itself SumWithAlias.jsx exports
+        // for browser as root["ReactSum"]["SumWithAlias"]
+        // console.log(SumWithAlias); // but then it's empty object - ????
+        // TODO
+
+        const myApp1 = document.querySelector('#myApp1');
+        const myApp2 = document.querySelector('#myApp2');
+        ReactDOM.render(React.createElement(Sum.default), myApp1);
+        ReactDOM.render(React.createElement(SumWithCssAlias.default), myApp2);
     </script>
 
     <!-- ReactSum Babel/JSX approach -->
     <script type="text/babel">
-        // const { Count } = ReactSum;
-        // console.log(ReactSum.Count);
+        const myApp3 = document.querySelector('#myApp3');
+        const myApp4 = document.querySelector('#myApp4');
 
-        const myApp6Container = document.querySelector('#myApp6');
+        // approach #1
+        ReactDOM.render(<ReactSum.Sum.default />, myApp3);
 
-        // ReactDOM.render(<ReactSum.Sum.default />, myApp5Container);
-        // or
-        class LocalSum extends ReactSum.Sum.default {}
-        ReactDOM.render(<LocalSum />, myApp6Container);
+        // approach #2
+        class LocalSum extends ReactSum.SumWithCssAlias.default {}
+        ReactDOM.render(<LocalSum />, myApp4);
     </script>
 </body>
 

@@ -4,12 +4,6 @@
   padding: 3px;
 }
 
-.count {
-  border: 1px blue dotted;
-  margin: 3px;
-  padding: 3px;
-}
-
 .app {
   display: flex;
   justify-content: center;
@@ -25,7 +19,6 @@
 
 .react-experiments {
   padding: 20px;
-  color: green;
 }
 
 

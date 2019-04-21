@@ -18,7 +18,7 @@
     "url": "git+https://github.com/alundiak/react-experiments.git"
   },
   "dependencies": {
-    "@lundiak/react-sum": "^1.1.7",
+    "@lundiak/react-sum": "^1.2.0",
     "react": "^16.8.6",
     "react-color-square": "^1.0.1",
     "react-dom": "^16.8.6",
