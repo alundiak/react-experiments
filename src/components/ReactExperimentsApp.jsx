@@ -28,6 +28,7 @@ import { SumWithCssAlias } from '@lundiak/react-sum';
 // From DIST
 //
 
+// look to ReactDevTool
 import DistSum from '@lundiak/react-sum/dist/Sum'; // works (after change devBuild with optimization to prodBuild w o.)
 import DistSumWithCssAlias from '@lundiak/react-sum/dist/SumWithCssAlias';
 
@@ -42,6 +43,10 @@ import WebpackSum from 'reactMath/Sum';
 import WebpackSumWithCssAlias from 'reactMath/SumWithCssAlias';
 
 import 'myCss/react-experiments-app.less';
+
+// look to ReactDevTool
+DistSum.displayName = 'ModifiedDistSum';
+DistSumWithCssAlias.displayName = 'ModifiedDistSumWithCssAlias';
 
 // console.log(ReactSum); // {Sum: ƒ, SumWithCssAlias: ƒ}
 // console.log(Sum); // ƒ Sum() {

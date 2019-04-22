@@ -11,6 +11,8 @@ const reactSumSrc = resolve(__dirname, 'node_modules/@lundiak/react-sum/src');
 export default env => {
     const { ifDev } = getIfUtils(env);
     return {
+        // target: 'web', // <=== can be omitted as default is 'web'
+
         // "core-js/modules/es6.promise", ?
         // "core-js/modules/es6.array.iterator", ?
         entry: {
@@ -30,15 +32,34 @@ export default env => {
                 myCss: resolve(src, './css'), // my current codebase css/ folder
                 css: resolve(reactSumSrc, 'css'), // to experiment with relative path from dependant component and webpack alias
                 components: resolve(src, './components'),
-                img: resolve(src, './images'),
+                // img: resolve(src, './images'), // not used in this repo.
                 // Alternative, when default imported code is not OK (or not working)
                 reactMath: resolve(__dirname, 'node_modules/@lundiak/react-sum/src/components')
             },
 
-            // Standard: 'main', 'browser', 'module' (not sure if it's Webpack or npm )
-            // Non-standard, and requires explicit mention in array: 'jsnext:main', 'esm'
+            // https://webpack.js.org/configuration/resolve/#resolvemainfields
+            //
+            // if ("target" === "webworker" | "web" | undefined):
+            // 'browser', 'module', 'main'
+            // VERIFIED WORKS. BUT ReactDevTool issue with displayName !!! Look in ReactDevTool.
+            //
+            // if ("target" === any other target, including node):
+            // 'module', 'main'
+            // VERIFIED, DOESN'T WORK. Error: "ReferenceError: require is not defined"
+            //
+            // not sure it/s correct.
+            // Based on my personal experiments, when no "target" specified in neither "react-sum" nor "react-experiments":
+            // 'main', 'browser', 'module'
+            // not sure it/s correct.
+            //
+            // Non-standard npm fields require explicit mention in array: 'jsnext:main', 'esm'
+            //
+            // So my sequence (I wanted to force using "module" for ES6/JSX imports. But...):
+            //
             mainFields: ['module', 'esm', 'jsnext:main', 'main', 'browser'],
-            // If above line comments, React Experiments will not work.
+            // VERIFIED WORKS. And look in ReactDevTool, where also all works better now.
+            //
+            // Important what is in package.json of provider components (fields: browser, module, main)
 
             modules: ['node_modules', 'bower_components', 'src'],
             extensions: ['.js', '.css', '.less', '.jsx', '.json']
@@ -94,9 +115,15 @@ export default env => {
                 },
                 {
                     test: /\.(png|svg|jpg|gif|pdf)$/,
-                    use: [
-                        'file-loader'
-                    ]
+                    use: {
+                        loader: 'url-loader',
+                        options: {
+                            fallback: 'file-loader',
+                            name: ifDev('[name].[ext]', '[hash].[ext]'),
+                            outputPath: 'images',
+                            publicPath: ifDev('/images', './images'),
+                        }
+                    }
                 }
             ]
         },
@@ -132,8 +159,8 @@ export default env => {
                 useTabs: false,               // Indent lines with tabs instead of spaces.
                 semi: true,                   // Print semicolons at the ends of statements.
                 encoding: 'utf-8',            // Which encoding scheme to use on files
-                extensions: [ ".less" ]       // Which file extensions to process
-              })
+                extensions: [".less"]       // Which file extensions to process
+            })
         ]),
         devServer: {
             host: 'localhost',
