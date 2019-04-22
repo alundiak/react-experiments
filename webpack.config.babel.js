@@ -50,7 +50,10 @@ export default env => {
                     // https://medium.freecodecamp.org/how-to-set-up-deploy-your-react-app-from-scratch-using-webpack-and-babel-a669891033d4
                     enforce: 'pre',
                     test: /\.(js|jsx)$/,
-                    exclude: /node_modules/,
+                    exclude: [
+                        /node_modules/, // when used npm link, in fact folder node_modules/@lundiak/react-sum is NOT in real node_modules.
+                        /\@lundiak\/react\-sum\/dist/ // adding explicit ignore regexp help to avoid ESLINT warnings.
+                    ],
                     loader: 'eslint-loader',
                 },
                 {
