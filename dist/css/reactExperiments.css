@@ -1,7 +1,21 @@
+.sum math {
+  font-size: 20px;
+  margin: 46px auto;
+  display: inline-block;
+}
+
 .sum {
   border: 1px green dashed;
   margin: 3px;
   padding: 3px;
+}
+.sum img {
+  width: 50px;
+}
+.sum .equal {
+  width: 58px;
+  height: 32px;
+  background: url(/f9c48ab1fcba5cda5ed94ebfe6abeda7.png) center;
 }
 
 .with-alias {

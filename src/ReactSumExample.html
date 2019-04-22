@@ -60,11 +60,11 @@
         const myApp4 = document.querySelector('#myApp4');
 
         // approach #1
-        ReactDOM.render(<ReactSum.Sum.default />, myApp3);
+        ReactDOM.render(<ReactSum.Sum.default useImages />, myApp3);
 
         // approach #2
         class LocalSum extends ReactSum.SumWithCssAlias.default {}
-        ReactDOM.render(<LocalSum />, myApp4);
+        ReactDOM.render(<LocalSum useASCII />, myApp4);
     </script>
 </body>
 

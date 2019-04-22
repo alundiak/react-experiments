@@ -5,8 +5,8 @@
   "main": "index.js",
   "module": "App.jsx",
   "scripts": {
-    "devBuild": "webpack --mode development --env.dev",
-    "prodBuild": "webpack --mode production --env.prod",
+    "devBuild": "rm -rf dist && webpack --mode development --env.dev",
+    "prodBuild": "rm -rf dist && webpack --mode production --env.prod",
     "build": "npm run devBuild",
     "prodStart": "webpack-dev-server --mode production --env.prod",
     "start": "webpack-dev-server --mode development --env.dev",
@@ -18,7 +18,7 @@
     "url": "git+https://github.com/alundiak/react-experiments.git"
   },
   "dependencies": {
-    "@lundiak/react-sum": "^1.2.2",
+    "@lundiak/react-sum": "^1.2.7",
     "react": "^16.8.6",
     "react-color": "^2.17.1",
     "react-color-square": "^1.0.1",

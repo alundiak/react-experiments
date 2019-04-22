@@ -66,6 +66,9 @@ const ReactExperimentsApp = (/* props */) => (
 
         <WebpackSum a={6} b={6} />
         <WebpackSumWithCssAlias a={6} b={6} />
+
+        <Sum a={7} b={7} useImages />
+        <Sum a={8} b={8} useASCII />
     </React.Fragment>
 );
 
