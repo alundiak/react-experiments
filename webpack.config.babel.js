@@ -167,6 +167,8 @@ export default env => {
             port: 3000,
             hot: ifDev(true, false),
             // contentBase: './dist' // ???
+            // watchContentBase: true, // full page reload
+            // https://webpack.js.org/configuration/dev-server/#devserverwatchcontentbase
         },
         devtool: 'source-map'
     }
