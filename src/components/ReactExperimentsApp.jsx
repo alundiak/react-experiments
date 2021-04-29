@@ -39,10 +39,11 @@ import DistSumWithCssAlias from '@lundiak/react-sum/dist/SumWithCssAlias';
 //
 // Alternative approach, in case of webpack aliasing DIRECTLY to node_modules.
 //
-import WebpackSum from 'reactMath/Sum';
-import WebpackSumWithCssAlias from 'reactMath/SumWithCssAlias';
+// import WebpackSum from 'reactMath/Sum';
+// import WebpackSumWithCssAlias from 'reactMath/SumWithCssAlias';
 
-import 'myCss/react-experiments-app.less';
+// import 'myCss/react-experiments-app.less'; // was supported by WebPack version
+import '../css/react-experiments-app.css';
 
 // look to ReactDevTool
 DistSum.displayName = 'ModifiedDistSum';
@@ -69,8 +70,8 @@ const ReactExperimentsApp = (/* props */) => (
         <DistSum a={4} b={4} />
         <DistSumWithCssAlias a={5} b={5} />
 
-        <WebpackSum a={6} b={6} />
-        <WebpackSumWithCssAlias a={6} b={6} />
+        {/* <WebpackSum a={6} b={6} /> */}
+        {/* <WebpackSumWithCssAlias a={6} b={6} /> */}
 
         <Sum a={7} b={7} useImages />
         <Sum a={8} b={8} useASCII />

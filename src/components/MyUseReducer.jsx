@@ -1,3 +1,4 @@
+// TODO move this to somewhere...
 // https://www.robinwieruch.de/react-usereducer-hook/
 // Reworked, Modified, Adapted.
 import React from 'react';
@@ -15,7 +16,7 @@ const initialTodos = [
     },
 ];
 
-const AppSimple = () => {
+export const AppSimple = () => {
     const handleChange = () => { };
 
     return (
@@ -58,7 +59,7 @@ const todoReducer = (state, action) => {
     }
 };
 
-const AppWithReducer = () => {
+export const AppWithReducer = () => {
     const [todos, dispatch] = React.useReducer(
         todoReducer,
         initialTodos
@@ -86,9 +87,4 @@ const AppWithReducer = () => {
             ))}
         </ul>
     );
-};
-
-export default {
-    AppSimple,
-    AppWithReducer
 };

@@ -1,0 +1,3 @@
+/* ~ means it will import from node_modules */
+@import "~@lundiak/react-sum/dist/Sum.css";
+@import "~@lundiak/react-sum/dist/SumWithCssAlias.css";
