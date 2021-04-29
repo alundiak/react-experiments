@@ -21,3 +21,5 @@ Place for ReactJS experiments
 
 - Used CSS Module with React component. Looks built-in with CRA.
 - SASS/SCSS could be instead LESS, but `node-sass` is huge and not convenient package to have on board.
+- Some examples hot to run Babel in pure HTML file. Might be useful.
+- Example of using `useReducer()`
